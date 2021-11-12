@@ -11,12 +11,12 @@ public class ConstantConfig {
     /**
      * 是否发送消息
      */
-    public static boolean IS_SEND_MESSAGE = true;
+    public static boolean IS_SEND_MESSAGE = false;
 
     /**
      * 是否搜索文件
      */
-    public static boolean IS_SERCH_FILE = true;
+    public static boolean IS_SERCH_FILE = false;
 
     /**
      * 请求地址
