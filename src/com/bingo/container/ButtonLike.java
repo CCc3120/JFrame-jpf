@@ -30,8 +30,8 @@ public class ButtonLike extends ButtonMouseAdapter {
         JOptionPane.showMessageDialog(ContainerManage.getjFrame(), MessageDialogUtil.getMessage("终于承认啦"), 
                 "♥♥♥", JOptionPane.PLAIN_MESSAGE, ImageUtil.getResize(ImageUtil.IMG_LI, false, false));
 
-        JOptionPane.showMessageDialog(ContainerManage.getjFrame(), MessageDialogUtil.getMessage("我就知道你喜欢我")
-                , "♥♥♥", JOptionPane.PLAIN_MESSAGE, ImageUtil.getResize(ImageUtil.IMG_LI, false, false));
+        JOptionPane.showMessageDialog(ContainerManage.getjFrame(), MessageDialogUtil.getMessage("我就知道你喜欢我"),
+                "♥♥♥", JOptionPane.PLAIN_MESSAGE, ImageUtil.getResize(ImageUtil.IMG_LI, false, false));
 
         JOptionPane.showMessageDialog(ContainerManage.getjFrame(), MessageDialogUtil.getMessage("告诉你一个秘密"),
                 "♥♥♥", JOptionPane.PLAIN_MESSAGE, ImageUtil.getResize(ImageUtil.IMG_LI, false, false));

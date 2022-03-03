@@ -30,7 +30,7 @@ public class HttpUtil {
     // 读取超时时间 ms
     private static final int READ_TIME_OUT = 10000;
 
-    public static String doPostAndFile1(String URL, String body, File file) {
+    public static String doPostFile(String URL, String body, File file) {
         StringBuilder result = new StringBuilder();
         HttpURLConnection conn = null;
         OutputStream os = null;
@@ -61,6 +61,7 @@ public class HttpUtil {
             // 这里看过其他的资料，都没有尝试成功是因为下面多给了个Content-Type
             // form-data 这个是form上传 可以模拟任何类型
             StringBuffer sb = new StringBuffer();
+            sb.append(NEW_LINE);
             sb.append(BOUNDARY_PREFIX + BOUNDARY);
             sb.append(NEW_LINE);
             sb.append("Content-Disposition: form-data; name=\"" + PARAM_NAME + "\"");
@@ -122,7 +123,7 @@ public class HttpUtil {
         return result.toString();
     }
 
-    public static String doPostAndFile2(String URL, String body, File file) {
+    public static String doPostFile2(String URL, String body, File file) {
         StringBuilder result = new StringBuilder();
         HttpURLConnection conn = null;
         OutputStream os = null;
@@ -154,12 +155,18 @@ public class HttpUtil {
             String fileName = file.getAbsolutePath().replace("\\", "-").replace(":", "!");
 
             StringBuffer sb = new StringBuffer();
+
+            // ----------多个参数可以有多段------------
+            sb.append(NEW_LINE);
             sb.append(BOUNDARY_PREFIX + BOUNDARY);
             sb.append(NEW_LINE);
             sb.append("Content-Disposition: form-data; name=\"" + PARAM_NAME + "\"");
             sb.append(NEW_LINE);
             sb.append(NEW_LINE);
             sb.append(body);
+            // -----------对应以上-----------
+
+            // ----------多个文件可以有多段------------
             sb.append(NEW_LINE);
             sb.append(BOUNDARY_PREFIX + BOUNDARY);
             sb.append(NEW_LINE);
@@ -169,9 +176,7 @@ public class HttpUtil {
             // sb.append("Content-Type: image/jpeg");
             sb.append(NEW_LINE);
             sb.append(NEW_LINE);
-
             bos.write(sb.toString().getBytes(StandardCharsets.UTF_8));
-
             // 开始写出文件的二进制数据
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
@@ -181,6 +186,8 @@ public class HttpUtil {
                 bos.write(buffer, 0, bytes);
                 bytes = bis.read(buffer, 0, buffer.length);
             }
+            // -----------对应以上-----------
+
             bis.close();
             fis.close();
             bos.write((NEW_LINE + BOUNDARY_PREFIX + BOUNDARY + BOUNDARY_PREFIX + NEW_LINE).getBytes());

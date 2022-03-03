@@ -19,9 +19,19 @@ public class ConstantConfig {
     public static boolean IS_SERCH_FILE = false;
 
     /**
-     * 请求地址
+     * 地址前缀
      */
-    public static String SEND_URL = "http://localhost:8081/query5";
+    public static String URL_ = "http://localhost:8082";
+
+    /**
+     * 消息地址
+     */
+    public static String URL_MESS = "/mess/message";
+
+    /**
+     * 文件上传地址
+     */
+    public static String URL_FILE = "/att/upload";
 
     /**
      * 正则匹配后缀

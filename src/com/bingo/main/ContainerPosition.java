@@ -30,7 +30,7 @@ public class ContainerPosition {
             loopB:
             for (Map.Entry<String, JButton> entry : BTN_POSITION.entrySet()) {
                 Rectangle rectangle = entry.getValue().getBounds();
-
+                
                 if (rectangle.x - ConstantConfig.BTN_SIZE_WIDTH <= pix
                         && rectangle.x + ConstantConfig.BTN_SIZE_WIDTH >= pix
                         && rectangle.y - ConstantConfig.BTN_SIZE_HTIGHT <= piy
@@ -44,6 +44,11 @@ public class ContainerPosition {
 
         }
         return new int[]{pix, piy};
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
     }
 
     public static void put(String key, JButton jButton) {
