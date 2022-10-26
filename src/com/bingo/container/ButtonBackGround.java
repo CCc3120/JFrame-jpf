@@ -1,12 +1,11 @@
 package com.bingo.container;
 
-import java.awt.event.MouseEvent;
-
-import javax.swing.*;
-
 import com.bingo.common.ButtonMouseAdapter;
 import com.bingo.main.ContainerManage;
 import com.bingo.main.ContainerPosition;
+
+import javax.swing.*;
+import java.awt.event.MouseEvent;
 
 public class ButtonBackGround extends ButtonMouseAdapter {
 
@@ -18,11 +17,10 @@ public class ButtonBackGround extends ButtonMouseAdapter {
     }
 
     @Override
-    public JButton buildJButton() {
+    public void buildJButton() {
         JButton jButton = new JButton("切换背景图");
         jButton.addMouseListener(this);
 
         ContainerPosition.put(MARK, jButton);
-        return jButton;
     }
 }

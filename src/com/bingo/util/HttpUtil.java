@@ -284,4 +284,68 @@ public class HttpUtil {
         }
         return result.toString();
     }
+
+    public static String doGet(String URL) {
+        OutputStreamWriter out = null;
+        BufferedReader in = null;
+        StringBuilder result = new StringBuilder();
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL(URL);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            // 发送POST请求必须设置为true
+            // conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setUseCaches(false);
+            // 设置连接超时时间和读取超时时间
+            conn.setConnectTimeout(CONNECT_TIME_OUT);
+            conn.setReadTimeout(READ_TIME_OUT);
+            // conn.setRequestProperty("Content-Type", "application/json");
+            // conn.setRequestProperty("Accept", "application/json");
+            conn.connect();
+            // 获取输出流
+            // out = new OutputStreamWriter(conn.getOutputStream());
+            // 向post请求发送json数据
+            // out.write(body);
+            // out.flush();
+            // 取得输入流，并使用Reader读取
+            if (200 == conn.getResponseCode()) {
+                in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+                String line;
+                while ((line = in.readLine()) != null) {
+                    result.append(line);
+                }
+            } else {
+                System.out.println("ResponseCode is an error code:" + conn.getResponseCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String url = "https://www.yizhiniao.com/api/oa/userLogin";
+        String body = "{\"phone\":\"15066535131\",\"pwd\":\"96e79218965eb72c92a549dd5a330112\"}";
+
+        System.out.println(doPost(url, body));
+
+        String getUrl = "https://www.yizhiniao.com/api/oa/sms/getAuthCode?phone=15066535131";
+        System.out.println(doGet(getUrl));
+    }
 }

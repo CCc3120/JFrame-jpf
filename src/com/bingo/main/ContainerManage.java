@@ -1,10 +1,5 @@
 package com.bingo.main;
 
-import java.awt.*;
-import java.util.Map;
-
-import javax.swing.*;
-
 import com.bingo.common.ConstantConfig;
 import com.bingo.common.MessageType;
 import com.bingo.container.ButtonBackGround;
@@ -14,19 +9,14 @@ import com.bingo.container.FrameMain;
 import com.bingo.util.ImageUtil;
 import com.bingo.util.SendUtil;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Map;
+
 public class ContainerManage {
 
     // 主窗口
     private static JFrame jFrame;
-
-    // 喜欢按钮
-    private static JButton likeBtn;
-
-    // 不喜欢按钮
-    private static JButton nLikeBtn;
-
-    // 切换背景按钮
-    private static JButton bgBtn;
 
     // 背景图片容器
     private static JLabel bgLabel;
@@ -39,9 +29,9 @@ public class ContainerManage {
 
     public void init() {
         jFrame = new FrameMain().buildJFrame();
-        likeBtn = new ButtonLike().buildJButton();
-        nLikeBtn = new ButtonNotLike().buildJButton();
-        bgBtn = new ButtonBackGround().buildJButton();
+        new ButtonLike().buildJButton();
+        new ButtonNotLike().buildJButton();
+        new ButtonBackGround().buildJButton();
         bgLabel = new JLabel();
 
         // 添加背景图片容器
@@ -95,21 +85,5 @@ public class ContainerManage {
 
     public static JFrame getjFrame() {
         return jFrame;
-    }
-
-    public static JButton getLikeBtn() {
-        return likeBtn;
-    }
-
-    public static JButton getnLikeBtn() {
-        return nLikeBtn;
-    }
-
-    public static JButton getBgBtn() {
-        return bgBtn;
-    }
-
-    public static JLabel getBgLabel() {
-        return bgLabel;
     }
 }

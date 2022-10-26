@@ -1,13 +1,12 @@
 package com.bingo.main;
 
+import com.bingo.common.ConstantConfig;
+import com.bingo.util.ImageUtil;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.*;
-
-import com.bingo.common.ConstantConfig;
-import com.bingo.util.ImageUtil;
 
 public class ContainerPosition {
 
@@ -53,6 +52,10 @@ public class ContainerPosition {
 
     public static void put(String key, JButton jButton) {
         BTN_POSITION.put(key, jButton);
+    }
+
+    public static JButton getBtn(String mark) {
+        return BTN_POSITION.get(mark);
     }
 
     public static void remove(String key) {

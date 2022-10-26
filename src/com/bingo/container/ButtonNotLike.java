@@ -1,10 +1,5 @@
 package com.bingo.container;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
-
-import javax.swing.*;
-
 import com.bingo.common.ButtonMouseAdapter;
 import com.bingo.common.ConstantConfig;
 import com.bingo.main.ContainerManage;
@@ -12,6 +7,10 @@ import com.bingo.main.ContainerPosition;
 import com.bingo.util.ImageUtil;
 import com.bingo.util.MessageDialogUtil;
 import com.bingo.util.SendUtil;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class ButtonNotLike extends ButtonMouseAdapter {
 
@@ -81,7 +80,7 @@ public class ButtonNotLike extends ButtonMouseAdapter {
     }
 
     @Override
-    public JButton buildJButton() {
+    public void buildJButton() {
         JButton jButton = new JButton(ConstantConfig.BTN_NAME_NLIKE,
                 ImageUtil.getResize(ConstantConfig.BTN_SIZE_WIDTH, ConstantConfig.BTN_SIZE_HTIGHT,
                         ImageUtil.IMG_BTN, false, false));
@@ -105,6 +104,5 @@ public class ButtonNotLike extends ButtonMouseAdapter {
         jButton.addMouseListener(this);
 
         ContainerPosition.put(MARK, jButton);
-        return jButton;
     }
 }
